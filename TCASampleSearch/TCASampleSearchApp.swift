@@ -10,8 +10,8 @@ import ComposableArchitecture
 
 @main
 struct TCASampleSearchApp: App {
-    static let store = Store(initialState: SearchStore.State()) {
-        SearchStore()
+    static let store = Store(initialState: SearchFeature.State()) {
+        SearchFeature()
           ._printChanges()
       }
     

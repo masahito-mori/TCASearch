@@ -9,7 +9,7 @@ import ComposableArchitecture
 import SwiftUI
 
 @Reducer
-struct SearchStore {
+struct SearchFeature {
     @ObservableState
     struct State: Equatable {
         var results: [GeocodingSearch.Result] = []
@@ -98,7 +98,7 @@ struct SearchStore {
 }
 
 struct SearchView: View {
-    @Bindable var store: StoreOf<SearchStore>
+    @Bindable var store: StoreOf<SearchFeature>
     
     var body: some View {
         NavigationStack {
@@ -148,7 +148,7 @@ struct SearchView: View {
     }
     
     @ViewBuilder
-    func weatherView(locationWeather: SearchStore.State.Weather?) -> some View {
+    func weatherView(locationWeather: SearchFeature.State.Weather?) -> some View {
         if let locationWeather {
             let days = locationWeather.days
                 .enumerated()
@@ -162,7 +162,7 @@ struct SearchView: View {
         }
     }
     
-    private func formattedWeather(day: SearchStore.State.Weather.Day, isToday: Bool) -> String {
+    private func formattedWeather(day: SearchFeature.State.Weather.Day, isToday: Bool) -> String {
         let date = isToday ? "Today" : dateFormatter.string(from: day.date).capitalized
         let min = "\(day.temperatureMin)\(day.temperatureMaxUnit)"
         let max = "\(day.temperatureMin)\(day.temperatureMaxUnit)"
@@ -179,7 +179,7 @@ struct SearchView: View {
 
 
 #Preview {
-    SearchView(store: Store(initialState: SearchStore.State()) {
+    SearchView(store: Store(initialState: SearchFeature.State()) {
         
     }
     )
